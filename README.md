@@ -31,7 +31,7 @@ npm run client
 
 ## Environment Variables (.env)
 
-### Server
+#### Server
 
 create a .env file in the root folder and add the following:
 
@@ -40,7 +40,7 @@ MONGO_URL=#######
 PORT=3001
 ```
 
-### Client
+#### Client
 
 Create a .env file in the client folder and add the following:
 

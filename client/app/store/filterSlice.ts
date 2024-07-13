@@ -6,8 +6,8 @@ interface FilterState {
 }
 
 const initialState: FilterState = {
-    category: 'crypto',
-    value: 'bitcoin',
+    category: 'stock',
+    value: 'MSFT',
 };
 
 const filterSlice = createSlice({

@@ -17,7 +17,7 @@ const initialState: DataState = {
 export const fetchData = createAsyncThunk(
   'data/fetchData',
   async (symbol: string) => {
-    const response = await axios.get(`http://localhost:3001/data/${symbol}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/data/${symbol}`);
     return response.data;
   }
 );

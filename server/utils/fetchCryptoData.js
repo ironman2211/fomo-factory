@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Data from '../models/dataModel.js'; // Import your data model
+import Data from '../models/dataModel.js'; 
 
 const fetchCryptoData = async (symbol) => {
   try {
@@ -8,10 +8,9 @@ const fetchCryptoData = async (symbol) => {
     );
     const price = response.data[symbol].usd;
     const newData = new Data({ symbol, price });
-    console.log(`Fetched crypto data for ${symbol}:`, price);
     await newData.save();
   } catch (error) {
-    console.error(`Error fetching crypto data for ${symbol}:`, error);
+    console.error(`Error fetching crypto data for ${symbol}:`);
   }
 };
 

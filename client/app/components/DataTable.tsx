@@ -20,13 +20,10 @@ const DataTable = () => {
   const status = useSelector((state: RootState) => state.data.status);
   const error = useSelector((state: RootState) => state.data.error);
   const symbol = useSelector((state: RootState) => state.filter.value);
-  console.log(data);
 
   useEffect(() => {
     dispatch(fetchData(symbol));
     const interval = setInterval(() => {
-      console.log(`fetching data for ${symbol}`);
-
       dispatch(fetchData(symbol));
     }, 5000);
 

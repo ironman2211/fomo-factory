@@ -7,7 +7,7 @@ const scheduleCryptoDataFetch = () => {
     cryptoSymbols.forEach((symbol) => {
       fetchCryptoData(symbol);
     });
-  }, 10000); // Fetch data every 10 seconds
+  }, 5000); // Fetch data every 5 seconds
 };
 
 export default scheduleCryptoDataFetch;

@@ -25,8 +25,8 @@ app.get("/data/:symbol", async (req, res) => {
 });
 
 // SCHEDULERS
-scheduleCryptoDataFetch();
-scheduleStockDataFetch();
+// scheduleCryptoDataFetch();
+// scheduleStockDataFetch();
 
 app.listen(3001, () => {
   console.log("Server running on port 3001");

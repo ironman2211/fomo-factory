@@ -1,5 +1,5 @@
-import axios from 'axios';
-import Data from '../models/dataModel.js'; 
+import axios from "axios";
+import Data from "../models/dataModel.js";
 
 const fetchCryptoData = async (symbol) => {
   try {
@@ -10,7 +10,15 @@ const fetchCryptoData = async (symbol) => {
     const newData = new Data({ symbol, price });
     await newData.save();
   } catch (error) {
-    console.error(`Error fetching crypto data for ${symbol}:`);
+    if (error.response && error.response.status === 429) {
+      const retryAfter = error.response.headers["retry-after"] || 5; // Default to 5 seconds
+      console.log(
+        `coingecko API Rate limit exceeded. Retry after ${retryAfter} seconds...`
+      );
+    } else {
+      console.error(`Error fetching crypto data for ${symbol}:`);
+      throw error; // Propagate other errors
+    }
   }
 };
 

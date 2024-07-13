@@ -4,13 +4,14 @@ import cors from "cors";
 import Data from "./models/dataModel.js"; // Import your data model
 import scheduleCryptoDataFetch from "./scheduler/CryptoScheduler.js";
 import scheduleStockDataFetch from "./scheduler/StockScheduler.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 app.use(cors());
 
 const PORT = process.env.PORT || 3001;
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/real-time-data";
+const MONGODB_URI = process.env.MONGODB_URI;
 
 // ROUTES
 app.get("/data/:symbol", async (req, res) => {
@@ -18,19 +19,15 @@ app.get("/data/:symbol", async (req, res) => {
   const data = await Data.find({ symbol }).sort({ timestamp: -1 }).limit(20);
   res.json(data);
 });
-mongoose
-  .connect(MONGODB_URI)
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((err) => {
-    console.log("Error connecting to MongoDB: 💻", err);
-  });
 
 // SCHEDULERS
 scheduleCryptoDataFetch();
 scheduleStockDataFetch();
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT} 🔨`);
-});
+// MONGODB CONNECTION && SERVER START
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server Port: ${PORT} 🔨 `));
+  })
+  .catch((error) => console.log(`${error} did not connect`));

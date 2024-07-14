@@ -2,6 +2,8 @@
 
 ### Stock And Cryptocurrency Analysis 💲
 
+#### Project URL: https://fomo-factory-8z4b.vercel.app
+
 ## Installation
 
 ```bash

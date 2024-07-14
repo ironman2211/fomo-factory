@@ -1,20 +1,26 @@
-# Use the official Node.js 16 image as the base image
-FROM node:16
+# Use the official Node.js 14 image as the base image
+FROM node:14
 
-# Create and change to the app directory
+# Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Copy application dependency manifests to the container image.
+# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
+
+# Clean npm cache
+RUN npm cache clean --force
 
 # Install dependencies
 RUN npm install
 
-# Copy the application source code to the container
+# Copy the rest of the application code to the working directory
 COPY . .
 
-# Expose the port the app runs on
+# Set the working directory to the server folder
+WORKDIR /usr/src/app/server
+
+# Expose port 3000 to the host
 EXPOSE 3000
 
-# Start the app
-CMD ["node", "server.js"]
+# Command to run the application
+CMD ["node", "index.js"]
